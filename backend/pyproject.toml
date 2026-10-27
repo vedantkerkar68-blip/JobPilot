@@ -1,0 +1,20 @@
+[tool.pytest.ini_options]
+# Run from backend/ with `python -m pytest`.
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+filterwarnings = [
+    "error::DeprecationWarning:app.*",
+    # Starlette's TestClient warns about httpx usage on newer starlette
+    # versions. It is unrelated to this project and does not affect results.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated:Warning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
